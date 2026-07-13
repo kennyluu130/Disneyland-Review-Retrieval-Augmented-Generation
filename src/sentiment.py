@@ -1,9 +1,8 @@
 """
-Sentiment analysis using NLTK's VADER, following DisneylandReviewAnalysis.ipynb.
+Sentiment analysis using NLTK's VADER
 
 VADER is used (rather than a transformer model) because it's fast, free,
-needs no GPU, and is exactly what the reference notebook used - keeping the
-RAG app's sentiment metadata consistent with the EDA notebook.
+needs no GPU.
 """
 from __future__ import annotations
 
