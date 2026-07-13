@@ -2,7 +2,7 @@
 
 An end-to-end RAG application over the [Disneyland Reviews dataset](https://www.kaggle.com/datasets/arushchillar/disneyland-reviews)
 (42k+ reviews across the California, Paris, and Hong Kong parks), with a live toggle between
-**Simple RAG** and **Hybrid Search + Reranking**, plus a built-in evaluation dashboard comparing them.
+**Simple RAG** and **Hybrid Search + Reranking**, plus an evaluation dashboard comparing them.
 
 Runs entirely on free tiers: local embeddings + reranker (sentence-transformers), Chroma for
 vector storage, and Groq's free LLM API for generation.
@@ -13,33 +13,33 @@ vector storage, and Groq's free LLM API for generation.
 Raw CSV (Kaggle)
    │
    ▼
-Preprocessing (dedupe, recover missing dates, cast types)   -- src/preprocessing.py
+Preprocessing (dedupe, recover missing dates, cast types)
    │
    ▼
-Pydantic validation (schema-checked rows dropped if malformed)   -- src/schemas.py
+Pydantic validation (schema-checked rows dropped if malformed)
    │
    ▼
-Sentiment scoring (NLTK VADER)   -- src/sentiment.py
+Sentiment scoring (NLTK VADER)
    │
    ▼
-Documents (LangChain)   -- src/ingestion.py
+Documents (LangChain)
    │
-   ├──► Chroma dense index (sentence-transformers embeddings)   -- src/vectorstore.py
-   └──► BM25 sparse index                                        -- src/vectorstore.py
+   ├──► Chroma dense index (sentence-transformers embeddings)
+   └──► BM25 sparse index                                        
               │
               ▼
    Retrieval toggle: Simple (dense only) vs. Hybrid (BM25+dense ensemble → cross-encoder rerank)
-              │                                                    -- src/retrieval.py, src/rerank.py
+              │                                                    
               ▼
-   Grounded prompt → Groq LLM → validated ChatResponse             -- src/rag_chain.py, src/llm.py
+   Grounded prompt → Groq LLM → validated ChatResponse            
               │
               ▼
-   Streamlit UI: Chat / Evaluation & Comparison / Dataset Insights  -- app.py
+   Streamlit UI: Chat / Evaluation & Comparison / Dataset Insights
 ```
 
 Evaluation (`src/evaluation.py`) runs a curated question set through both pipelines and scores
 each answer with keyword recall + an LLM-judge (faithfulness & relevance, 1-5), so the two
-retrieval strategies can be compared quantitatively rather than just eyeballed.
+retrieval strategies can be compared quantitatively
 
 ## Setup
 
@@ -83,19 +83,19 @@ This cleans the data, scores sentiment, and builds/persists the Chroma + BM25 in
 streamlit run app.py
 ```
 
-## Deployment (free)
+## Deployment
 
 1. Push this repo to GitHub.
 2. Run `scripts/build_index.py` locally and commit the resulting `data/processed/` folder
    (Chroma index + BM25 pickle + cleaned CSV) - Streamlit Community Cloud won't run the build
    script for you, so the prebuilt index needs to ship with the repo.
-3. Deploy on [Streamlit Community Cloud](https://share.streamlit.io) (free) pointing at `app.py`.
+3. Deploy on [Streamlit Community Cloud](https://share.streamlit.io) pointing at `app.py`.
 4. In the app's **Settings → Secrets**, add:
    ```toml
    GROQ_API_KEY = "your_key_here"
    ```
 
-## Notes on keeping this free & fast to run
+## Notes
 
 - `config.py`'s `sample_size` (default 4000, stratified by park) keeps the deployed demo's
   memory footprint small. Set it to `None` to index the full ~40k reviews if running locally
