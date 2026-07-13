@@ -1,0 +1,21 @@
+pandas>=2.2
+numpy>=1.26
+nltk>=3.9
+
+pydantic>=2.7
+pydantic-settings>=2.3
+
+langchain>=0.2
+langchain-community>=0.2
+langchain-groq>=0.1.9
+langchain-huggingface>=0.0.3
+
+chromadb>=0.5
+sentence-transformers>=3.0
+rank_bm25>=0.2.2
+
+streamlit>=1.36
+python-dotenv>=1.0
+matplotlib>=3.9
+
+kagglehub>=0.2  # only needed for scripts/download_data.py
