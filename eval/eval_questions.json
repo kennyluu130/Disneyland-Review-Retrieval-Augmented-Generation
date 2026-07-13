@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What do visitors complain about most regarding wait times?",
+    "expected_keywords": ["wait", "long", "line", "queue", "fastpass", "fast pass"]
+  },
+  {
+    "question": "How do reviewers feel about the food options at Disneyland?",
+    "expected_keywords": ["food", "restaurant", "expensive", "price", "meal", "snack"]
+  },
+  {
+    "question": "Is Disneyland Paris considered good for young children?",
+    "expected_keywords": ["kids", "children", "child", "family", "toddler"]
+  },
+  {
+    "question": "What do people say about the staff and cast members?",
+    "expected_keywords": ["staff", "cast member", "friendly", "helpful", "rude"]
+  },
+  {
+    "question": "Are there complaints about how crowded the parks get?",
+    "expected_keywords": ["crowded", "busy", "packed", "crowd", "people"]
+  },
+  {
+    "question": "What do reviewers think about ride availability and rides being closed?",
+    "expected_keywords": ["ride", "closed", "maintenance", "down", "unavailable"]
+  },
+  {
+    "question": "How is the value for money at Hong Kong Disneyland?",
+    "expected_keywords": ["price", "expensive", "worth", "value", "money", "cost"]
+  },
+  {
+    "question": "What do people say about weather affecting their visit?",
+    "expected_keywords": ["hot", "rain", "weather", "humid", "cold"]
+  },
+  {
+    "question": "What negative experiences do reviewers mention about ticket prices?",
+    "expected_keywords": ["ticket", "price", "expensive", "cost", "overpriced"]
+  },
+  {
+    "question": "What do visitors enjoy most about the parades and fireworks shows?",
+    "expected_keywords": ["parade", "fireworks", "show", "night", "spectacular"]
+  }
+]

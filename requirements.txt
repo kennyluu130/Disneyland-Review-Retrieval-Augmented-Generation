@@ -6,7 +6,9 @@ pydantic>=2.7
 pydantic-settings>=2.3
 
 langchain>=0.2
+langchain-classic>=1.0     # EnsembleRetriever lives here as of LangChain 1.0+
 langchain-community>=0.2
+langchain-chroma>=0.1      # dedicated Chroma integration package (replaces langchain_community.vectorstores.Chroma)
 langchain-groq>=0.1.9
 langchain-huggingface>=0.0.3
 

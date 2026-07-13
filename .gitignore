@@ -1,0 +1,21 @@
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+*.env
+.env
+
+# Data folder
+data/*.csv
+
+# VS Code settings
+.vscode/
+
+# big artifacts we don't want in git
+data/raw/
+data/processed/
