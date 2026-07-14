@@ -40,6 +40,14 @@ def _load_processed_df() -> pd.DataFrame:
     return load_processed_data()
 
 
+@st.cache_data(show_spinner=False)
+def _cached_top_words_by_sentiment(df: pd.DataFrame) -> pd.DataFrame:
+    # Uncached, this reruns NLTK tokenization over the whole corpus on every
+    # Streamlit script rerun (which happens on every chat message, since
+    # st.tabs() executes all tab bodies unconditionally on every rerun).
+    return top_words_by_sentiment(df)
+
+
 def _indexes_available() -> bool:
     return settings.chroma_persist_dir.exists() and settings.bm25_corpus_path.exists()
 
@@ -211,7 +219,7 @@ with insights_tab:
 
     st.markdown("#### Most common words: high vs. low sentiment reviews")
     with st.spinner("Computing word frequencies..."):
-        word_df = top_words_by_sentiment(df)
+        word_df = _cached_top_words_by_sentiment(df)
     wcol1, wcol2 = st.columns(2)
     with wcol1:
         st.markdown("**High sentiment**")
