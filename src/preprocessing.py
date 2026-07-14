@@ -1,7 +1,6 @@
 """
 Data preprocessing for the Disneyland Reviews dataset.
 
-This mirrors DisneylandReviewPreprocessing.ipynb / DisneylandReviewAnalysis.ipynb:
   1. Drop duplicate reviews
   2. Parse missing Year_Month values out of the review text itself
   3. Split Year_Month into integer Year / Month columns
