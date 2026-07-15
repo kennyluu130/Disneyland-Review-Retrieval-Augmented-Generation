@@ -9,6 +9,7 @@ instead of re-embedding on every restart.
 from __future__ import annotations
 
 import logging
+import os
 import pickle
 from functools import lru_cache
 from pathlib import Path
@@ -28,9 +29,25 @@ from config import settings
 logger = logging.getLogger(__name__)
 
 
+def _configure_hf_auth() -> None:
+    """
+    Set HF_TOKEN / HUGGING_FACE_HUB_TOKEN so huggingface_hub authenticates its
+    requests. Unauthenticated requests share a much lower rate limit, and on a
+    shared-IP host like Streamlit Community Cloud that limit can be hit by
+    other apps' traffic too - which manifests as a download that silently
+    stalls rather than a clean error. A free token from
+    https://huggingface.co/settings/tokens fixes this.
+    """
+    if settings.hf_token:
+        os.environ.setdefault("HF_TOKEN", settings.hf_token)
+        os.environ.setdefault("HUGGING_FACE_HUB_TOKEN", settings.hf_token)
+
+
 @lru_cache(maxsize=1)
 def get_embedding_function() -> HuggingFaceEmbeddings:
-    """Free, local embedding model - no API key or cost."""
+    """Free, local embedding model - no API key required, but an HF token is
+    recommended (see _configure_hf_auth) to avoid rate-limited/stalled downloads."""
+    _configure_hf_auth()
     return HuggingFaceEmbeddings(model_name=settings.embedding_model_name)
 
 

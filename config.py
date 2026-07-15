@@ -18,6 +18,10 @@ class Settings(BaseSettings):
     llm_model_name: str = "llama-3.3-70b-versatile"
     llm_temperature: float = 0.0
 
+    # --- Hugging Face (optional but recommended - avoids unauthenticated rate limits,
+    # which can cause the embedding model download to stall on shared cloud IPs) ---
+    hf_token: str = ""
+
     # --- Embeddings / Reranking (all free, local, no API cost) ---
     embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     cross_encoder_model_name: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"

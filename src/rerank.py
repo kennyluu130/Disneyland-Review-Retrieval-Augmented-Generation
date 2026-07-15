@@ -15,12 +15,14 @@ from langchain_core.documents import Document
 from sentence_transformers import CrossEncoder
 
 from config import settings
+from src.vectorstore import _configure_hf_auth
 
 logger = logging.getLogger(__name__)
 
 
 @lru_cache(maxsize=1)
 def get_cross_encoder() -> CrossEncoder:
+    _configure_hf_auth()
     return CrossEncoder(settings.cross_encoder_model_name)
 
 
